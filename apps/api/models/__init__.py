@@ -9,6 +9,11 @@ from .image_job import ImageGenerationJob, ImageJobType, ImageJobStatus
 from .video_clip import VideoClip, ClipType, VideoClipStatus
 from .audio_track import AudioTrack, TrackType
 from .final_export import FinalExport, ExportPreset, ExportStatus
+from .system_model import (
+    Model, ModelType, ModelStatus,
+    SystemSettings, RendererTarget, CleanupPolicy,
+    PerformanceProfile,
+)
 
 __all__ = [
     "User",
@@ -41,4 +46,12 @@ __all__ = [
     "FinalExport",
     "ExportPreset",
     "ExportStatus",
+    # Phase 6
+    "Model",
+    "ModelType",
+    "ModelStatus",
+    "SystemSettings",
+    "RendererTarget",
+    "CleanupPolicy",
+    "PerformanceProfile",
 ]

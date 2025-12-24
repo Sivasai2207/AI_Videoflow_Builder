@@ -90,6 +90,15 @@ AI VideoFlow Builder is a comprehensive video generation pipeline that takes a s
 - ✅ Health checks (ComfyUI, Ollama, FFmpeg, Redis)
 - ✅ Export settings + SRT subtitle export
 
+### Phase 6 — Productization + Scale
+- ✅ Model Manager (install/verify/locate AI models)
+- ✅ Performance benchmarking + safe defaults
+- ✅ System diagnostics dashboard
+- ✅ Renderer adapter (local ComfyUI, remote GPU ready)
+- ✅ Setup wizard with guided configuration
+- ✅ One-command launcher (`./run_local.sh`)
+- ✅ Storage cleanup policies
+
 ---
 
 ## 🏗️ Architecture

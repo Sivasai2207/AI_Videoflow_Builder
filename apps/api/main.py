@@ -16,12 +16,16 @@ from routers import (
     export_router,
     qc_router,
     health_router,
+    # Phase 6
+    system_router,
+    models_router,
+    performance_router,
 )
 
 app = FastAPI(
     title="Video Generator AI",
     description="Local-first AI video generation platform",
-    version="0.5.0",
+    version="0.6.0",
 )
 
 # CORS middleware
@@ -46,6 +50,10 @@ app.include_router(audio_router)
 app.include_router(export_router)
 app.include_router(qc_router)
 app.include_router(health_router)
+# Phase 6
+app.include_router(system_router)
+app.include_router(models_router)
+app.include_router(performance_router)
 
 
 @app.on_event("startup")
@@ -57,4 +65,4 @@ async def on_startup():
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
-    return {"status": "healthy", "version": "0.5.0"}
+    return {"status": "healthy", "version": "0.6.0"}

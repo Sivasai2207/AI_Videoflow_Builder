@@ -10,6 +10,9 @@ from .audio import router as audio_router
 from .export import router as export_router
 from .qc import router as qc_router
 from .health import router as health_router
+from .system import router as system_router
+from .models import router as models_router
+from .performance import router as performance_router
 
 __all__ = [
     "auth_router",
@@ -24,4 +27,8 @@ __all__ = [
     "export_router",
     "qc_router",
     "health_router",
+    # Phase 6
+    "system_router",
+    "models_router",
+    "performance_router",
 ]
