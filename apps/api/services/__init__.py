@@ -1,25 +1,31 @@
 from datetime import datetime, timedelta
 from typing import Optional
 from uuid import UUID
+import hashlib
+import secrets
 
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from sqlmodel import Session, select
 
 from config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from models.user import User, TokenData
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verify a password against its hash."""
-    return pwd_context.verify(plain_password, hashed_password)
+    # Using SHA256 with salt for simplicity (bcrypt has issues with Python 3.14)
+    if ":" not in hashed_password:
+        return False
+    salt, stored_hash = hashed_password.split(":", 1)
+    check_hash = hashlib.sha256((salt + plain_password).encode()).hexdigest()
+    return check_hash == stored_hash
 
 
 def get_password_hash(password: str) -> str:
-    """Hash a password."""
-    return pwd_context.hash(password)
+    """Hash a password with a random salt."""
+    salt = secrets.token_hex(16)
+    password_hash = hashlib.sha256((salt + password).encode()).hexdigest()
+    return f"{salt}:{password_hash}"
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
