@@ -81,6 +81,15 @@ AI VideoFlow Builder is a comprehensive video generation pipeline that takes a s
 - ✅ Background music integration
 - ✅ Platform-specific export presets
 
+### Phase 5 — Quality + Robustness
+- ✅ QC module (blur detection, aspect ratio, face detection)
+- ✅ Generate 3 variants per shot, pick best
+- ✅ Video transitions (fade, dip-to-black)
+- ✅ hero_plus_prev reference strategy for consistency
+- ✅ Resumable pipeline (restart from last node)
+- ✅ Health checks (ComfyUI, Ollama, FFmpeg, Redis)
+- ✅ Export settings + SRT subtitle export
+
 ---
 
 ## 🏗️ Architecture
@@ -409,6 +418,19 @@ Completes the pipeline:
 - TTS voiceover generation
 - Music integration and mixing
 - Platform export presets (Instagram, YouTube, TikTok)
+
+### Phase 5 — Quality + Robustness
+
+**Commit**: `feat: Phase 5 - QC, Variants, Transitions, Resumable Pipeline`
+
+Makes the system creator-grade:
+- QC module (blur detection, aspect ratio, face detection)
+- Generate 3 variants per shot, pick winner
+- Video transitions (fade, dip-to-black)
+- hero_plus_prev reference strategy for character consistency
+- Resumable pipeline (restarts from last incomplete node)
+- Health checks for all external services
+- Export settings + SRT subtitle export
 
 ---
 
