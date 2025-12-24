@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+.next/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.ruff_cache/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database
+data/db/*.sqlite
+data/db/*.sqlite-journal
+
+# Generated assets
+data/projects/*/
+data/exports/
+
+# ComfyUI outputs (handled by ComfyUI)
+data/comfyui/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Misc
+*.bak
+*.tmp
+*.temp

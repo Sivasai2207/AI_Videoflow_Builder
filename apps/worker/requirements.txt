@@ -1,0 +1,4 @@
+redis>=5.0.0
+rq>=1.16.0
+sqlmodel>=0.0.14
+python-dotenv>=1.0.0
