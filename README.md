@@ -157,25 +157,52 @@ AI VideoFlow Builder is a comprehensive video generation pipeline that takes a s
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### System Requirements
 
-- Python 3.10+
-- Node.js 18+
-- Redis server
-- FFmpeg
-- (Optional) Ollama for local LLM
-- (Optional) ComfyUI for image generation
+| Requirement | Minimum | Recommended |
+|-------------|---------|-------------|
+| **OS** | macOS 12+ / Ubuntu 20.04+ | macOS 13+ (Apple Silicon) |
+| **RAM** | 16 GB | 32 GB |
+| **Storage** | 50 GB free | 100 GB free |
+| **Python** | 3.10+ | 3.11+ |
+| **Node.js** | 18+ | 20+ |
+
+### Required Dependencies
+
+```bash
+# macOS (using Homebrew)
+brew install python@3.11 node redis ffmpeg
+
+# Ubuntu/Debian
+sudo apt update
+sudo apt install python3.11 python3.11-venv nodejs npm redis-server ffmpeg
+```
+
+### Optional AI Services
+
+| Service | Purpose | Installation |
+|---------|---------|--------------|
+| **Ollama** | Local LLM for plan generation | [ollama.ai](https://ollama.ai) |
+| **ComfyUI** | Image generation (SDXL) | [github.com/comfyanonymous/ComfyUI](https://github.com/comfyanonymous/ComfyUI) |
+
+```bash
+# Install Ollama (macOS/Linux)
+curl -fsSL https://ollama.ai/install.sh | sh
+ollama pull llama3.2
+
+# ComfyUI - see their GitHub for full setup
+```
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone git@github.com:Sivasai2207/AI_Videoflow_Builder.git
+git clone https://github.com/Sivasai2207/AI_Videoflow_Builder.git
 cd AI_Videoflow_Builder
 
 # Install backend dependencies
 cd apps/api
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
@@ -183,7 +210,7 @@ pip install -r requirements.txt
 cd ../web
 npm install
 
-# Create environment file
+# Return to root and create environment file
 cd ../..
 cp .env.example .env
 ```
@@ -193,37 +220,61 @@ cp .env.example .env
 Edit `.env` with your settings:
 
 ```env
-SECRET_KEY=your-secret-key-here
+# Required
+SECRET_KEY=your-secret-key-here-min-32-chars
+
+# Services (defaults work for local development)
 REDIS_URL=redis://localhost:6379
 OLLAMA_URL=http://localhost:11434
 COMFYUI_URL=http://127.0.0.1:8188
+
+# Optional
+OLLAMA_MODEL=llama3.2
+DATABASE_URL=sqlite:///./data/db/app.db
 ```
 
-### Running
+### Running the App
+
+**Option 1: One-Command Launcher (Recommended)**
 
 ```bash
-# Start all services
-./start.sh
+./run_local.sh
+```
 
-# Or run individually:
-# Terminal 1: Redis
+**Option 2: Manual Start**
+
+```bash
+# Terminal 1: Start Redis
 redis-server
 
-# Terminal 2: API
-cd apps/api && source venv/bin/activate && uvicorn main:app --reload
+# Terminal 2: Start API
+cd apps/api && source venv/bin/activate && uvicorn main:app --host 127.0.0.1 --port 8000
 
-# Terminal 3: Worker
+# Terminal 3: Start Worker (for background jobs)
 cd apps/worker && source ../api/venv/bin/activate && rq worker
 
-# Terminal 4: Frontend
+# Terminal 4: Start Frontend
 cd apps/web && npm run dev
 ```
 
-### Access
+### Access Points
 
-- **Frontend**: http://localhost:3000
-- **API Docs**: http://localhost:8000/docs
-- **Health Check**: http://localhost:8000/health
+| Service | URL | Description |
+|---------|-----|-------------|
+| **Web UI** | http://localhost:3000 | Main application |
+| **API Docs** | http://localhost:8000/docs | Swagger documentation |
+| **Health Check** | http://localhost:8000/health | API status |
+
+### 🔐 Authentication
+
+The app uses **self-registration**. There are no preset credentials.
+
+1. Open http://localhost:3000
+2. Click **"Sign Up"** to create an account
+3. Enter your email and password
+4. You're ready to create videos!
+
+> **Note**: For local development, any email format works. Passwords must be at least 8 characters.
 
 ---
 
